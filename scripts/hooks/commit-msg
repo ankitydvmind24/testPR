@@ -1,0 +1,12 @@
+
+JIRA_REGEX="WAD-[0-9]+"
+commit_msg_file="$1"
+commit_msg="$(cat "$commit_msg_file")"
+
+if ! echo "$commit_msg" | grep -qE "$JIRA_REGEX"; then
+  echo ""
+  echo "❌ Commit aborted: message must include a Jira ticket ID like WAD-123"
+  echo "👉 You wrote: '$commit_msg'"
+  echo "✅ Example: WAD-456 Fix login bug"
+  exit 1
+fi
